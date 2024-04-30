@@ -3,8 +3,9 @@ FROM node:18.20.2-bookworm-slim
 COPY graphserver.js .
 COPY package.json .
 COPY UScities.json .
-//ADDED:
-RUN sudo apt install zlib
+//-- ADDED :
+RUN sudo apt-get install zlib1g-dev
+//-- -- -- --
 RUN npm install &&\
     apk update &&\
     apk upgrade
