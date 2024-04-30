@@ -5,30 +5,42 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 
-Uncomment the lines of code  which have been commented below to make the application secure
 const helmet = require('helmet')
 const csrf = require('csurf');
+const bodyParser = require('body-parser');
 
-app.use(helmet)
-app.use(express.csrf());
+//app.use(helmet)
+//app.use(express.csrf());
+app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middlewares
-const csrfProtect = csrf({ cookie: true })
+/*const csrfProtect = csrf({ cookie: true })
 app.get('/form', csrfProtect, function(req, res) {
 res.render('send', { csrfToken: req.csrfToken() })
 })
 app.post('/posts/create', parseForm, csrfProtect, function(req, res) {
 res.send('data is being processed')
-})
+})*/
+
+app.use(csrfProtect);
+app.get('/form', function(req, res) {
+  res.render('send', { csrfToken: req.csrfToken() }); 
+});
+app.post('/posts/create', csrfProtection, function(req, res) {
+  res.send('Data is being processed');
+});
 
 const sessionConfig = {
-  secret: 'hsbqiz2208!',
+  secret: process.env.SESSION_SECRET || 'hsbqiz2208!',
   name: 'graphy',
   resave: false,
   saveUninitialized: false,
   store: store,
   cookie : {
     sameSite: 'strict',
+    httpOnly: true,
+    secure: true,
   }
 };
 
