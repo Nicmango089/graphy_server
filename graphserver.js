@@ -9,27 +9,27 @@ const helmet = require('helmet')
 const csrf = require('csurf');
 const bodyParser = require('body-parser');
 
-//app.use(helmet)
-//app.use(express.csrf());
-app.use(helmet());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(helmet)
+app.use(express.csrf());
+//app.use(helmet());
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middlewares
-/*const csrfProtect = csrf({ cookie: true })
+const csrfProtect = csrf({ cookie: true })
 app.get('/form', csrfProtect, function(req, res) {
 res.render('send', { csrfToken: req.csrfToken() })
 })
 app.post('/posts/create', parseForm, csrfProtect, function(req, res) {
 res.send('data is being processed')
-})*/
+})
 
-app.use(csrfProtect);
+/*app.use(csrfProtect);
 app.get('/form', function(req, res) {
   res.render('send', { csrfToken: req.csrfToken() }); 
 });
 app.post('/posts/create', csrfProtection, function(req, res) {
   res.send('Data is being processed');
-});
+});*/
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET || 'hsbqiz2208!',
