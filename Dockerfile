@@ -1,10 +1,13 @@
 //FROM node:hydrogen-buster
 //FROM node:18.20.2-bookworm-slim
-FROM node:latest
+//FROM node:latest
+FROM node:node:22-bookworm-slim
 COPY graphserver.js .
 COPY package.json .
 COPY UScities.json .
+
 //-- ADDED :
+
 //RUN sudo apt-get install zlib1g-dev
 
 //RUN sudo apt clean &&\
@@ -22,10 +25,13 @@ COPY UScities.json .
 //    dpkg-buildpackage -rfakeroot -us -uc -b -nc &&\
 //    sudo apt-get install ../zlib1g-1.2.7.*.deb
 
-RUN sudo apt-get install zlib1g-dev &&\
-    sudo apt-get upgrade
+//RUN sudo apt-get install zlib1g-dev &&\
+//    sudo apt-get upgrade
+
+RUN sudo apt-get update && sudo apt-get dist-upgrade
 
 //-- -- -- --
+
 RUN npm install &&\
     apk update &&\
     apk upgrade
