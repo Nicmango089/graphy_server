@@ -15,12 +15,15 @@ COPY UScities.json .
 
 //RUN apt-get install zlib
 
-RUN sudo apt-get install build-essential fakeroot &&\
-    sudo apt-get build-dep zlib &&\
-    dpkg-source zlib_1.2.7.dfsg-13.dsc &&\
-    cd zlib-1.2.7.dfsg &&\
-    dpkg-buildpackage -rfakeroot -us -uc -b -nc &&\
-    sudo apt-get install ../zlib1g-1.2.7.*.deb
+//RUN sudo apt-get install build-essential fakeroot &&\
+//    sudo apt-get build-dep zlib &&\
+//    dpkg-source zlib_1.2.7.dfsg-13.dsc &&\
+//    cd zlib-1.2.7.dfsg &&\
+//    dpkg-buildpackage -rfakeroot -us -uc -b -nc &&\
+//    sudo apt-get install ../zlib1g-1.2.7.*.deb
+
+RUN sudo apt-get install zlib1g-dev &&\
+    sudo apt-get upgrade
 
 //-- -- -- --
 RUN npm install &&\
