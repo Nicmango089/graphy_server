@@ -28,7 +28,9 @@ COPY UScities.json .
 //RUN sudo apt-get install zlib1g-dev &&\
 //    sudo apt-get upgrade
 
-RUN sudo apt-get update && sudo apt-get dist-upgrade
+//RUN sudo apt-get update && sudo apt-get dist-upgrade
+
+RUN sudo apt-get upgrade
 
 //-- -- -- --
 
